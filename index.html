@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>とかち道中ひざくりげ 2026｜スタッフ タスク配置表</title>
+<style>
+  :root {
+    --cream:#FAF6EF;
+    --card:#FFFDF8;
+    --line:#E6DCC6;
+    --ink:#3A342C;
+    --sub:#8A7C63;
+    --accent:#B5482D;
+    --accent-bg:#F1EAD9;
+  }
+  * { box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
+  html,body { margin:0; padding:0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", "Yu Gothic", sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.5;
+    padding-bottom: 48px;
+  }
+  .wrap { max-width: 640px; margin: 0 auto; padding: 0 16px; }
+
+  header.top {
+    background: var(--accent);
+    color: #fff;
+    padding: 22px 16px 20px 16px;
+  }
+  header.top .wrap { padding:0 16px; }
+  header.top h1 {
+    margin:0 0 4px 0; font-size: 20px; font-weight:700; letter-spacing:0.3px;
+  }
+  header.top p { margin:0; font-size:12.5px; opacity:0.9; }
+  header.top .total {
+    margin-top:10px; font-size:13px; opacity:0.95;
+  }
+  header.top .total b { font-size:20px; margin-left:6px; }
+
+  nav.tabs {
+    position: sticky; top:0; z-index:10;
+    display:flex; background:#fff; border-bottom:1px solid var(--line);
+  }
+  nav.tabs a {
+    flex:1; text-align:center; padding:12px 4px; font-size:13.5px; font-weight:700;
+    color: var(--sub); text-decoration:none; border-bottom:3px solid transparent;
+  }
+  nav.tabs a:target, nav.tabs a.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  section { padding: 18px 0 6px 0; }
+  h2.sec-title {
+    font-size:15px; margin: 4px 0 12px 0; color:var(--ink);
+    display:flex; align-items:center; gap:6px;
+  }
+
+  /* legend */
+  .legend { display:flex; flex-wrap:wrap; gap:6px; margin-bottom: 14px; }
+  .chip {
+    display:inline-flex; align-items:center; gap:5px;
+    background: var(--accent-bg); border-radius: 999px; padding: 5px 10px 5px 6px;
+    font-size:11.5px; color:#5B4A2F;
+  }
+  .chip-dot { width:9px; height:9px; border-radius:50%; display:inline-block; }
+
+  /* pickup box */
+  .pickup-box {
+    background: var(--accent-bg); border-radius:12px; padding:12px 14px; margin-bottom:18px;
+  }
+  .pu-item { display:flex; align-items:flex-start; gap:10px; padding:6px 0; }
+  .pu-item + .pu-item { border-top:1px dashed #E0D3B8; }
+  .pu-dot { width:11px; height:11px; border-radius:50%; margin-top:4px; flex-shrink:0; }
+  .pu-text { display:flex; flex-direction:column; font-size:13px; }
+  .pu-name { font-weight:700; }
+  .pu-detail { color:#6B5B40; font-size:12.5px; }
+
+  /* leg timeline */
+  ul.leg-timeline { list-style:none; margin:0; padding:0; }
+  .leg-row {
+    display:flex; gap:10px; background:var(--card); border:1px solid var(--line);
+    border-radius:10px; padding:10px 12px; margin-bottom:8px;
+  }
+  .leg-num {
+    width:24px; height:24px; border-radius:50%; background:var(--accent); color:#fff;
+    font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:center;
+    flex-shrink:0; margin-top:1px;
+  }
+  .leg-main { flex:1; min-width:0; }
+  .leg-name { font-size:13.5px; font-weight:600; }
+  .leg-meta { font-size:11.5px; color:var(--sub); margin-top:2px; display:flex; gap:10px; flex-wrap:wrap;}
+  .leg-time { color:var(--accent); font-weight:700; }
+  .leg-dots { margin-top:6px; display:flex; gap:4px; flex-wrap:wrap; }
+  .leg-dot { width:10px; height:10px; border-radius:50%; display:inline-block; }
+
+  /* staff accordions */
+  details.staff-card {
+    background:var(--card); border:1px solid var(--line); border-radius:12px;
+    margin-bottom:10px; overflow:hidden;
+  }
+  details.staff-card summary {
+    list-style:none; cursor:pointer; padding:12px 14px;
+    display:flex; justify-content:space-between; align-items:center;
+    font-size:14.5px;
+  }
+  details.staff-card summary::-webkit-details-marker { display:none; }
+  details.staff-card summary::after {
+    content: "▾"; color:var(--sub); font-size:12px; margin-left:8px;
+  }
+  details.staff-card[open] summary::after { content: "▴"; }
+  .s-name { font-weight:700; }
+  .s-sched { font-size:11.5px; color:var(--sub); }
+  .staff-card-body { padding: 0 14px 14px 14px; }
+  .mini-strip { display:flex; height:8px; border-radius:4px; overflow:hidden; margin: 2px 0 10px 0; }
+  .strip-seg { height:100%; }
+  .sc-sub { font-size:12px; font-weight:700; color:#5B4A2F; margin-bottom:4px; }
+  ul.al-list { list-style:none; margin:0; padding:0; font-size:12px; }
+  ul.al-list li {
+    display:flex; align-items:baseline; gap:6px; padding:5px 0; border-bottom:1px dashed #EFE7D6;
+    flex-wrap: wrap;
+  }
+  .al-num {
+    width:16px; height:16px; line-height:16px; text-align:center; border-radius:50%;
+    background:var(--accent-bg); color:#5B4A2F; font-size:9px; flex-shrink:0;
+  }
+  .al-name { flex:1; min-width:120px; }
+  .al-dist { color:var(--sub); font-size:11px; }
+  .al-time { color:var(--accent); font-weight:700; font-size:11px; }
+  .card-pickup {
+    margin-top:10px; background:var(--accent-bg); border-radius:8px; padding:8px 10px; font-size:12px; color:#5B4A2F;
+  }
+
+  .footnote { font-size:11px; color:#9A8E76; margin: 14px 0 0 0; }
+
+  @media (min-width: 700px) {
+    .wrap { max-width: 760px; }
+    ul.leg-timeline { display:grid; grid-template-columns: 1fr 1fr; gap:0 12px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <h1>とかち道中ひざくりげ 2026</h1>
+    <p>スタッフ タスク配置表（全15区間）</p>
+    <div class="total">総距離<b>100.62 km</b></div>
+  </div>
+</header>
+
+<nav class="tabs">
+  <a href="#course">区間タイムライン</a>
+  <a href="#staffs">スタッフ別</a>
+</nav>
+
+<div class="wrap">
+
+  <section id="pickup">
+    <h2 class="sec-title">🚗 お迎え担当</h2>
+    <div class="pickup-box">
+      <div class="pu-item">
+                <span class="pu-dot" style="background:#7C8B4E"></span>
+                <div class="pu-text"><span class="pu-name">金子さん</span><span class="pu-detail">5:00 帯広市内 5名</span></div>
+            </div><div class="pu-item">
+                <span class="pu-dot" style="background:#C99A2E"></span>
+                <div class="pu-text"><span class="pu-name">工藤さん</span><span class="pu-detail">5:30 セイコーマート新得店 堤さん（千葉県）</span></div>
+            </div><div class="pu-item">
+                <span class="pu-dot" style="background:#8B5E83"></span>
+                <div class="pu-text"><span class="pu-name">小林（睦）さん</span><span class="pu-detail">小林さん兄弟</span></div>
+            </div>
+    </div>
+    <div class="legend">
+      <span class='chip'><span class='chip-dot' style='background:#B5482D'></span>沖田さん</span><span class='chip'><span class='chip-dot' style='background:#7C8B4E'></span>金子さん</span><span class='chip'><span class='chip-dot' style='background:#C99A2E'></span>工藤さん</span><span class='chip'><span class='chip-dot' style='background:#3E6E8E'></span>久保さん</span><span class='chip'><span class='chip-dot' style='background:#8B5E83'></span>小林（睦）さん</span><span class='chip'><span class='chip-dot' style='background:#C77A3B'></span>坂本さん</span><span class='chip'><span class='chip-dot' style='background:#4A7A6D'></span>速水さん</span>
+    </div>
+  </section>
+
+  <section id="course">
+    <h2 class="sec-title">区間タイムライン</h2>
+    <ul class="leg-timeline">
+      
+        <li class="leg-row">
+          <div class="leg-num">1</div>
+          <div class="leg-main">
+            <div class="leg-name">スタート→道の駅うりまく</div>
+            <div class="leg-meta"><span class="leg-dist">17.34 km</span><span class='leg-time'>7:00 発</span></div>
+            <div class="leg-dots"><span class='leg-dot' style='background:#B5482D' title='沖田さん'></span><span class='leg-dot' style='background:#7C8B4E' title='金子さん'></span><span class='leg-dot' style='background:#C99A2E' title='工藤さん'></span><span class='leg-dot' style='background:#8B5E83' title='小林（睦）さん'></span></div>
+          </div>
+        </li>
+        <li class="leg-row">
+          <div class="leg-num">2</div>
+          <div class="leg-main">
+            <div class="leg-name">道の駅うりまく→鹿追セブンCP1</div>
+            <div class="leg-meta"><span class="leg-dist">10.51 km</span></div>
+            <div class="leg-dots"><span class='leg-dot' style='background:#B5482D' title='沖田さん'></span><span class='leg-dot' style='background:#7C8B4E' title='金子さん'></span><span class='leg-dot' style='background:#C99A2E' title='工藤さん'></span></div>
+          </div>
+        </li>
+        <li class="leg-row">
+          <div class="leg-num">3</div>
+          <div class="leg-main">
+            <div class="leg-name">鹿追セブンCP1→屈足</div>
+            <div class="leg-meta"><span class="leg-dist">8.99 km</span><span class='leg-time'>12:30〜13:20</span></div>
+            <div class="leg-dots"><span class='leg-dot' style='background:#B5482D' title='沖田さん'></span><span class='leg-dot' style='background:#7C8B4E' title='金子さん'></span><span class='leg-dot' style='background:#C99A2E' title='工藤さん'></span><span class='leg-dot' style='background:#C77A3B' title='坂本さん'></span></div>
+          </div>
+        </li>
+        <li class="leg-row">
+          <div class="leg-num">4</div>
+          <div class="leg-main">
+            <div class="leg-name">屈足→新得駅</div>
+            <div class="leg-meta"><span class="leg-dist">7.83 km</span></div>
+            <div class="leg-dots"><span class='leg-dot' style='background:#B5482D' title='沖田さん'></span><span class='leg-dot' style='background:#7C8B4E' title='金子さん'></span><span class='leg-dot' style='background:#3E6E8E' title='久保さん'></span><span class='leg-dot' style='background:#C77A3B' title='坂本さん'></span></div>
+          </div>
+        </li>
+        <li class="leg-row">
+          <div class="leg-num">5</div>
+          <div class="leg-main">
+            <div class="leg-name">新得駅→新得セブン</div>
+            <div class="leg-meta"><span class="leg-dist">0.95 km</span><span class='leg-time'>19:00〜21:00</span></div>
+            <div class="leg-dots"><span class='leg-dot' style='background:#3E6E8E' title='久保さん'></span><span class='leg-dot' style='background:#C77A3B' title='坂本さん'></span><span class='leg-dot' style='background:#4A7A6D' title='速水さん'></span></div>
+          </div>
+        </li>
+        <li class="leg-row">
+          <div class="leg-num">6</div>
+          <div class="leg-main">
+            <div class="leg-name">新得セブン→清水町曲がり</div>
+            <div class="leg-meta"><span class="leg-dist">8.56 km</span></div>
+            <div class="leg-dots"><span class='leg-dot' style='background:#3E6E8E' title='久保さん'></span><span class='leg-dot' style='background:#C77A3B' title='坂本さん'></span><span class='leg-dot' style='background:#4A7A6D' title='速水さん'></span></div>
+          </div>
+        </li>
+        <li class="leg-row">
+          <div class="leg-num">7</div>
+          <div class="leg-main">
+            <div class="leg-name">清水町曲がり→清水駅</div>
+            <div class="leg-meta"><span class="leg-dist">1.15 km</span></div>
+            <div class="leg-dots"><span class='leg-dot' style='background:#7C8B4E' title='金子さん'></span><span class='leg-dot' style='background:#3E6E8E' title='久保さん'></span><span class='leg-dot' style='background:#C77A3B' title='坂本さん'></span><span class='leg-dot' style='background:#4A7A6D' title='速水さん'></span></div>
+          </div>
+        </li>
+        <li class="leg-row">
+          <div class="leg-num">8</div>
+          <div class="leg-main">
+            <div class="leg-name">清水駅→清水セブン</div>
+            <div class="leg-meta"><span class="leg-dist">0.9 km</span><span class='leg-time'>0:30〜3:00（翌日）</span></div>
+            <div class="leg-dots"><span class='leg-dot' style='background:#7C8B4E' title='金子さん'></span><span class='leg-dot' style='background:#C99A2E' title='工藤さん'></span><span class='leg-dot' style='background:#4A7A6D' title='速水さん'></span></div>
+          </div>
+        </li>
+        <li class="leg-row">
+          <div class="leg-num">9</div>
+          <div class="leg-main">
+            <div class="leg-name">清水セブン→御影セブン</div>
+            <div class="leg-meta"><span class="leg-dist">10.5 km</span></div>
+            <div class="leg-dots"><span class='leg-dot' style='background:#7C8B4E' title='金子さん'></span><span class='leg-dot' style='background:#C99A2E' title='工藤さん'></span></div>
+          </div>
+        </li>
+        <li class="leg-row">
+          <div class="leg-num">10</div>
+          <div class="leg-main">
+            <div class="leg-name">御影セブン→芽室インターセブン</div>
+            <div class="leg-meta"><span class="leg-dist">12.74 km</span></div>
+            <div class="leg-dots"><span class='leg-dot' style='background:#3E6E8E' title='久保さん'></span><span class='leg-dot' style='background:#C77A3B' title='坂本さん'></span></div>
+          </div>
+        </li>
+        <li class="leg-row">
+          <div class="leg-num">11</div>
+          <div class="leg-main">
+            <div class="leg-name">芽室インターセブン→折返し</div>
+            <div class="leg-meta"><span class="leg-dist">1.62 km</span><span class='leg-time'>1:40〜4:30（翌日）</span></div>
+            <div class="leg-dots"><span class='leg-dot' style='background:#7C8B4E' title='金子さん'></span><span class='leg-dot' style='background:#C99A2E' title='工藤さん'></span><span class='leg-dot' style='background:#4A7A6D' title='速水さん'></span></div>
+          </div>
+        </li>
+        <li class="leg-row">
+          <div class="leg-num">12</div>
+          <div class="leg-main">
+            <div class="leg-name">折返し→芽室駅</div>
+            <div class="leg-meta"><span class="leg-dist">5.73 km</span></div>
+            <div class="leg-dots"><span class='leg-dot' style='background:#7C8B4E' title='金子さん'></span><span class='leg-dot' style='background:#C99A2E' title='工藤さん'></span><span class='leg-dot' style='background:#4A7A6D' title='速水さん'></span></div>
+          </div>
+        </li>
+        <li class="leg-row">
+          <div class="leg-num">13</div>
+          <div class="leg-main">
+            <div class="leg-name">芽室駅→芽室公園</div>
+            <div class="leg-meta"><span class="leg-dist">1.1 km</span></div>
+            <div class="leg-dots"><span class='leg-dot' style='background:#3E6E8E' title='久保さん'></span><span class='leg-dot' style='background:#C77A3B' title='坂本さん'></span></div>
+          </div>
+        </li>
+        <li class="leg-row">
+          <div class="leg-num">14</div>
+          <div class="leg-main">
+            <div class="leg-name">芽室公園→JA芽室</div>
+            <div class="leg-meta"><span class="leg-dist">2.7 km</span></div>
+            <div class="leg-dots"><span class='leg-dot' style='background:#3E6E8E' title='久保さん'></span><span class='leg-dot' style='background:#C77A3B' title='坂本さん'></span></div>
+          </div>
+        </li>
+        <li class="leg-row">
+          <div class="leg-num">15</div>
+          <div class="leg-main">
+            <div class="leg-name">JA芽室→嵐山</div>
+            <div class="leg-meta"><span class="leg-dist">10 km</span><span class='leg-time'>6:00〜9:50（翌日・ゴール）</span></div>
+            <div class="leg-dots"><span class='leg-dot' style='background:#B5482D' title='沖田さん'></span><span class='leg-dot' style='background:#7C8B4E' title='金子さん'></span><span class='leg-dot' style='background:#C99A2E' title='工藤さん'></span><span class='leg-dot' style='background:#3E6E8E' title='久保さん'></span><span class='leg-dot' style='background:#8B5E83' title='小林（睦）さん'></span><span class='leg-dot' style='background:#C77A3B' title='坂本さん'></span><span class='leg-dot' style='background:#4A7A6D' title='速水さん'></span></div>
+          </div>
+        </li>
+    </ul>
+  </section>
+
+  <section id="staffs">
+    <h2 class="sec-title">スタッフ別 担当区間</h2>
+    
+        <details class="staff-card" open>
+          <summary style="border-left:8px solid #B5482D">
+            <span class="s-name">沖田さん</span>
+            <span class="s-sched">スタートのみ</span>
+          </summary>
+          <div class="staff-card-body">
+            <div class='mini-strip'><div class='strip-seg' style='flex-grow:17.34;background:#B5482D'></div><div class='strip-seg' style='flex-grow:10.51;background:#B5482D'></div><div class='strip-seg' style='flex-grow:8.99;background:#B5482D'></div><div class='strip-seg' style='flex-grow:7.83;background:#B5482D'></div><div class='strip-seg' style='flex-grow:1.2;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:8.56;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:1.2;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:1.2;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:10.5;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:12.74;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:1.62;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:5.73;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:1.2;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:2.7;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:10;background:#B5482D'></div></div>
+            <div class="sc-sub">巡回区間（5区間）</div>
+            <ul class="al-list"><li><span class="al-num">1</span><span class="al-name">スタート→道の駅うりまく</span><span class="al-dist">17.34km</span><span class='al-time'>7:00 発</span></li><li><span class="al-num">2</span><span class="al-name">道の駅うりまく→鹿追セブンCP1</span><span class="al-dist">10.51km</span></li><li><span class="al-num">3</span><span class="al-name">鹿追セブンCP1→屈足</span><span class="al-dist">8.99km</span><span class='al-time'>12:30〜13:20</span></li><li><span class="al-num">4</span><span class="al-name">屈足→新得駅</span><span class="al-dist">7.83km</span></li><li><span class="al-num">15</span><span class="al-name">JA芽室→嵐山</span><span class="al-dist">10km</span><span class='al-time'>6:00〜9:50（翌日・ゴール）</span></li></ul>
+            
+          </div>
+        </details>
+        <details class="staff-card">
+          <summary style="border-left:8px solid #7C8B4E">
+            <span class="s-name">金子さん</span>
+            <span class="s-sched">終日</span>
+          </summary>
+          <div class="staff-card-body">
+            <div class='mini-strip'><div class='strip-seg' style='flex-grow:17.34;background:#7C8B4E'></div><div class='strip-seg' style='flex-grow:10.51;background:#7C8B4E'></div><div class='strip-seg' style='flex-grow:8.99;background:#7C8B4E'></div><div class='strip-seg' style='flex-grow:7.83;background:#7C8B4E'></div><div class='strip-seg' style='flex-grow:1.2;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:8.56;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:1.2;background:#7C8B4E'></div><div class='strip-seg' style='flex-grow:1.2;background:#7C8B4E'></div><div class='strip-seg' style='flex-grow:10.5;background:#7C8B4E'></div><div class='strip-seg' style='flex-grow:12.74;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:1.62;background:#7C8B4E'></div><div class='strip-seg' style='flex-grow:5.73;background:#7C8B4E'></div><div class='strip-seg' style='flex-grow:1.2;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:2.7;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:10;background:#7C8B4E'></div></div>
+            <div class="sc-sub">巡回区間（10区間）</div>
+            <ul class="al-list"><li><span class="al-num">1</span><span class="al-name">スタート→道の駅うりまく</span><span class="al-dist">17.34km</span><span class='al-time'>7:00 発</span></li><li><span class="al-num">2</span><span class="al-name">道の駅うりまく→鹿追セブンCP1</span><span class="al-dist">10.51km</span></li><li><span class="al-num">3</span><span class="al-name">鹿追セブンCP1→屈足</span><span class="al-dist">8.99km</span><span class='al-time'>12:30〜13:20</span></li><li><span class="al-num">4</span><span class="al-name">屈足→新得駅</span><span class="al-dist">7.83km</span></li><li><span class="al-num">7</span><span class="al-name">清水町曲がり→清水駅</span><span class="al-dist">1.15km</span></li><li><span class="al-num">8</span><span class="al-name">清水駅→清水セブン</span><span class="al-dist">0.9km</span><span class='al-time'>0:30〜3:00（翌日）</span></li><li><span class="al-num">9</span><span class="al-name">清水セブン→御影セブン</span><span class="al-dist">10.5km</span></li><li><span class="al-num">11</span><span class="al-name">芽室インターセブン→折返し</span><span class="al-dist">1.62km</span><span class='al-time'>1:40〜4:30（翌日）</span></li><li><span class="al-num">12</span><span class="al-name">折返し→芽室駅</span><span class="al-dist">5.73km</span></li><li><span class="al-num">15</span><span class="al-name">JA芽室→嵐山</span><span class="al-dist">10km</span><span class='al-time'>6:00〜9:50（翌日・ゴール）</span></li></ul>
+            <div class='card-pickup'>🚗 お迎え：5:00 帯広市内 5名</div>
+          </div>
+        </details>
+        <details class="staff-card">
+          <summary style="border-left:8px solid #C99A2E">
+            <span class="s-name">工藤さん</span>
+            <span class="s-sched">終日</span>
+          </summary>
+          <div class="staff-card-body">
+            <div class='mini-strip'><div class='strip-seg' style='flex-grow:17.34;background:#C99A2E'></div><div class='strip-seg' style='flex-grow:10.51;background:#C99A2E'></div><div class='strip-seg' style='flex-grow:8.99;background:#C99A2E'></div><div class='strip-seg' style='flex-grow:7.83;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:1.2;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:8.56;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:1.2;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:1.2;background:#C99A2E'></div><div class='strip-seg' style='flex-grow:10.5;background:#C99A2E'></div><div class='strip-seg' style='flex-grow:12.74;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:1.62;background:#C99A2E'></div><div class='strip-seg' style='flex-grow:5.73;background:#C99A2E'></div><div class='strip-seg' style='flex-grow:1.2;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:2.7;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:10;background:#C99A2E'></div></div>
+            <div class="sc-sub">巡回区間（8区間）</div>
+            <ul class="al-list"><li><span class="al-num">1</span><span class="al-name">スタート→道の駅うりまく</span><span class="al-dist">17.34km</span><span class='al-time'>7:00 発</span></li><li><span class="al-num">2</span><span class="al-name">道の駅うりまく→鹿追セブンCP1</span><span class="al-dist">10.51km</span></li><li><span class="al-num">3</span><span class="al-name">鹿追セブンCP1→屈足</span><span class="al-dist">8.99km</span><span class='al-time'>12:30〜13:20</span></li><li><span class="al-num">8</span><span class="al-name">清水駅→清水セブン</span><span class="al-dist">0.9km</span><span class='al-time'>0:30〜3:00（翌日）</span></li><li><span class="al-num">9</span><span class="al-name">清水セブン→御影セブン</span><span class="al-dist">10.5km</span></li><li><span class="al-num">11</span><span class="al-name">芽室インターセブン→折返し</span><span class="al-dist">1.62km</span><span class='al-time'>1:40〜4:30（翌日）</span></li><li><span class="al-num">12</span><span class="al-name">折返し→芽室駅</span><span class="al-dist">5.73km</span></li><li><span class="al-num">15</span><span class="al-name">JA芽室→嵐山</span><span class="al-dist">10km</span><span class='al-time'>6:00〜9:50（翌日・ゴール）</span></li></ul>
+            <div class='card-pickup'>🚗 お迎え：5:30 セイコーマート新得店 堤さん（千葉県）</div>
+          </div>
+        </details>
+        <details class="staff-card">
+          <summary style="border-left:8px solid #3E6E8E">
+            <span class="s-name">久保さん</span>
+            <span class="s-sched">11日 15:00〜</span>
+          </summary>
+          <div class="staff-card-body">
+            <div class='mini-strip'><div class='strip-seg' style='flex-grow:17.34;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:10.51;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:8.99;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:7.83;background:#3E6E8E'></div><div class='strip-seg' style='flex-grow:1.2;background:#3E6E8E'></div><div class='strip-seg' style='flex-grow:8.56;background:#3E6E8E'></div><div class='strip-seg' style='flex-grow:1.2;background:#3E6E8E'></div><div class='strip-seg' style='flex-grow:1.2;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:10.5;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:12.74;background:#3E6E8E'></div><div class='strip-seg' style='flex-grow:1.62;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:5.73;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:1.2;background:#3E6E8E'></div><div class='strip-seg' style='flex-grow:2.7;background:#3E6E8E'></div><div class='strip-seg' style='flex-grow:10;background:#3E6E8E'></div></div>
+            <div class="sc-sub">巡回区間（8区間）</div>
+            <ul class="al-list"><li><span class="al-num">4</span><span class="al-name">屈足→新得駅</span><span class="al-dist">7.83km</span></li><li><span class="al-num">5</span><span class="al-name">新得駅→新得セブン</span><span class="al-dist">0.95km</span><span class='al-time'>19:00〜21:00</span></li><li><span class="al-num">6</span><span class="al-name">新得セブン→清水町曲がり</span><span class="al-dist">8.56km</span></li><li><span class="al-num">7</span><span class="al-name">清水町曲がり→清水駅</span><span class="al-dist">1.15km</span></li><li><span class="al-num">10</span><span class="al-name">御影セブン→芽室インターセブン</span><span class="al-dist">12.74km</span></li><li><span class="al-num">13</span><span class="al-name">芽室駅→芽室公園</span><span class="al-dist">1.1km</span></li><li><span class="al-num">14</span><span class="al-name">芽室公園→JA芽室</span><span class="al-dist">2.7km</span></li><li><span class="al-num">15</span><span class="al-name">JA芽室→嵐山</span><span class="al-dist">10km</span><span class='al-time'>6:00〜9:50（翌日・ゴール）</span></li></ul>
+            
+          </div>
+        </details>
+        <details class="staff-card">
+          <summary style="border-left:8px solid #8B5E83">
+            <span class="s-name">小林（睦）さん</span>
+            <span class="s-sched">スタートとゴール</span>
+          </summary>
+          <div class="staff-card-body">
+            <div class='mini-strip'><div class='strip-seg' style='flex-grow:17.34;background:#8B5E83'></div><div class='strip-seg' style='flex-grow:10.51;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:8.99;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:7.83;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:1.2;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:8.56;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:1.2;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:1.2;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:10.5;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:12.74;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:1.62;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:5.73;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:1.2;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:2.7;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:10;background:#8B5E83'></div></div>
+            <div class="sc-sub">巡回区間（2区間）</div>
+            <ul class="al-list"><li><span class="al-num">1</span><span class="al-name">スタート→道の駅うりまく</span><span class="al-dist">17.34km</span><span class='al-time'>7:00 発</span></li><li><span class="al-num">15</span><span class="al-name">JA芽室→嵐山</span><span class="al-dist">10km</span><span class='al-time'>6:00〜9:50（翌日・ゴール）</span></li></ul>
+            <div class='card-pickup'>🚗 お迎え：小林さん兄弟</div>
+          </div>
+        </details>
+        <details class="staff-card">
+          <summary style="border-left:8px solid #C77A3B">
+            <span class="s-name">坂本さん</span>
+            <span class="s-sched">11日 12:00〜</span>
+          </summary>
+          <div class="staff-card-body">
+            <div class='mini-strip'><div class='strip-seg' style='flex-grow:17.34;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:10.51;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:8.99;background:#C77A3B'></div><div class='strip-seg' style='flex-grow:7.83;background:#C77A3B'></div><div class='strip-seg' style='flex-grow:1.2;background:#C77A3B'></div><div class='strip-seg' style='flex-grow:8.56;background:#C77A3B'></div><div class='strip-seg' style='flex-grow:1.2;background:#C77A3B'></div><div class='strip-seg' style='flex-grow:1.2;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:10.5;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:12.74;background:#C77A3B'></div><div class='strip-seg' style='flex-grow:1.62;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:5.73;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:1.2;background:#C77A3B'></div><div class='strip-seg' style='flex-grow:2.7;background:#C77A3B'></div><div class='strip-seg' style='flex-grow:10;background:#C77A3B'></div></div>
+            <div class="sc-sub">巡回区間（9区間）</div>
+            <ul class="al-list"><li><span class="al-num">3</span><span class="al-name">鹿追セブンCP1→屈足</span><span class="al-dist">8.99km</span><span class='al-time'>12:30〜13:20</span></li><li><span class="al-num">4</span><span class="al-name">屈足→新得駅</span><span class="al-dist">7.83km</span></li><li><span class="al-num">5</span><span class="al-name">新得駅→新得セブン</span><span class="al-dist">0.95km</span><span class='al-time'>19:00〜21:00</span></li><li><span class="al-num">6</span><span class="al-name">新得セブン→清水町曲がり</span><span class="al-dist">8.56km</span></li><li><span class="al-num">7</span><span class="al-name">清水町曲がり→清水駅</span><span class="al-dist">1.15km</span></li><li><span class="al-num">10</span><span class="al-name">御影セブン→芽室インターセブン</span><span class="al-dist">12.74km</span></li><li><span class="al-num">13</span><span class="al-name">芽室駅→芽室公園</span><span class="al-dist">1.1km</span></li><li><span class="al-num">14</span><span class="al-name">芽室公園→JA芽室</span><span class="al-dist">2.7km</span></li><li><span class="al-num">15</span><span class="al-name">JA芽室→嵐山</span><span class="al-dist">10km</span><span class='al-time'>6:00〜9:50（翌日・ゴール）</span></li></ul>
+            
+          </div>
+        </details>
+        <details class="staff-card">
+          <summary style="border-left:8px solid #4A7A6D">
+            <span class="s-name">速水さん</span>
+            <span class="s-sched">11日 18:00〜</span>
+          </summary>
+          <div class="staff-card-body">
+            <div class='mini-strip'><div class='strip-seg' style='flex-grow:17.34;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:10.51;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:8.99;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:7.83;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:1.2;background:#4A7A6D'></div><div class='strip-seg' style='flex-grow:8.56;background:#4A7A6D'></div><div class='strip-seg' style='flex-grow:1.2;background:#4A7A6D'></div><div class='strip-seg' style='flex-grow:1.2;background:#4A7A6D'></div><div class='strip-seg' style='flex-grow:10.5;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:12.74;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:1.62;background:#4A7A6D'></div><div class='strip-seg' style='flex-grow:5.73;background:#4A7A6D'></div><div class='strip-seg' style='flex-grow:1.2;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:2.7;background:#E7DFCF'></div><div class='strip-seg' style='flex-grow:10;background:#4A7A6D'></div></div>
+            <div class="sc-sub">巡回区間（7区間）</div>
+            <ul class="al-list"><li><span class="al-num">5</span><span class="al-name">新得駅→新得セブン</span><span class="al-dist">0.95km</span><span class='al-time'>19:00〜21:00</span></li><li><span class="al-num">6</span><span class="al-name">新得セブン→清水町曲がり</span><span class="al-dist">8.56km</span></li><li><span class="al-num">7</span><span class="al-name">清水町曲がり→清水駅</span><span class="al-dist">1.15km</span></li><li><span class="al-num">8</span><span class="al-name">清水駅→清水セブン</span><span class="al-dist">0.9km</span><span class='al-time'>0:30〜3:00（翌日）</span></li><li><span class="al-num">11</span><span class="al-name">芽室インターセブン→折返し</span><span class="al-dist">1.62km</span><span class='al-time'>1:40〜4:30（翌日）</span></li><li><span class="al-num">12</span><span class="al-name">折返し→芽室駅</span><span class="al-dist">5.73km</span></li><li><span class="al-num">15</span><span class="al-name">JA芽室→嵐山</span><span class="al-dist">10km</span><span class='al-time'>6:00〜9:50（翌日・ゴール）</span></li></ul>
+            
+          </div>
+        </details>
+  </section>
+
+  <p class="footnote">※ 時刻は各区間の予想通過時間帯の目安です。当日の進行状況により前後します。「翌日」表記は大会2日目を指します。</p>
+</div>
+
+</body>
+</html>
